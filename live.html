@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Datos del Servidor R2LA</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            color: #cc0000;
+        }
+        pre {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 15px;
+            overflow: auto;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📡 Estado del servidor R2LA</h1>
+
+<pre id="resultado">Cargando datos...</pre>
+
+<script>
+    $.ajax({
+        url: 'http://38.54.45.126:8000/live/get_server_data_jsonp', // ⚠️ Cambiá esta línea
+        type: 'GET',
+        dataType: 'jsonp',
+        crossDomain: true,
+        success: function (data) {
+            $('#resultado').text(JSON.stringify(data, null, 2));
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            $('#resultado').text('❌ Error al consultar el servidor: ' + errorThrown);
+            console.error(errorThrown);
+        }
+    });
+</script>
+
+</body>
+</html>
